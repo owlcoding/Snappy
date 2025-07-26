@@ -19,5 +19,9 @@ let package = Package(
             name: "Snappy"
             , exclude: ["SnappyExample"]
         ),
+        .testTarget(
+            name: "SnappyTests",
+            dependencies: ["Snappy"]
+        ),
     ]
 )
