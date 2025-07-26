@@ -93,7 +93,6 @@ public struct SnappyView<Content: View, SnapPointContent: View>: View {
                 })
                 .onPreferenceChange(SnappyViewSizePreferenceKey.self) { size in
                     let limitOfMovement = limitOfMovement(in: geometry)
-                    print(limitOfMovement)
                     let limitedRect = CGRect(x: limitOfMovement.minX,
                                              y: limitOfMovement.minY,
                                              width: limitOfMovement.width - size.width,
@@ -108,7 +107,7 @@ public struct SnappyView<Content: View, SnapPointContent: View>: View {
             
                 .offset(constrainTranslation(translation + rememberedTranslation))
                 .overlay {
-                    if let snapPointContent = snapPointContent {
+                    if shouldShowSnapPoints, let snapPointContent = snapPointContent {
                         ForEach(Array(snapPoints), id: \.self) { pt in
                             snapPointContent
                                 .offset(x: pt.x * limitOfMovement(in: geometry).width, y: pt.y * limitOfMovement(in: geometry).height)
